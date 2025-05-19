@@ -57,7 +57,9 @@ const Testimonials = () => {
                   </svg>
                 ))}
               </div>
-              <p className="text-gray-600 mb-6">"{testimonial.content}"</p>
+              <p className="text-gray-600 mb-6">
+                &quot;{testimonial.content}&quot;
+              </p>
               <div>
                 <h4 className="font-semibold text-gray-800">
                   {testimonial.name}

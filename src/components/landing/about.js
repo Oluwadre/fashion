@@ -1,4 +1,6 @@
 import React from 'react'
+import Image from "next/image"
+import Dp from "@/components/assets/images/bay dp.jpg"
 
 const About = () => {
   return (
@@ -9,11 +11,9 @@ const About = () => {
         </h2>
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-8 md:mb-0 md:pr-10">
-            <div className="bg-gray-200 h-64 md:h-96 rounded-lg overflow-hidden">
-              {/* Replace with your about image */}
-              <div className="w-full h-full flex items-center justify-center text-gray-500">
-                About Us Image
-              </div>
+            <div className="bg-gray-200 h-full md:h-full rounded-lg overflow-hidden">
+              <Image src={Dp} alt="img"/>
+              
             </div>
           </div>
           <div className="md:w-1/2">

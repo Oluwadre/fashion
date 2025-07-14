@@ -113,7 +113,12 @@ const Contact = () => {
                 </svg>
               </div>
               <h4 className="font-semibold text-gray-800 mb-1">Call Us</h4>
-              <p className="text-gray-600 text-sm">+2347069034085</p>
+              <a
+                href="tel:+2347069034085"
+                className="text-gray-600 text-sm hover:underline"
+              >
+                +2347069034085
+              </a>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm text-center">
               <div className="text-pink-600 mb-3">
@@ -132,7 +137,12 @@ const Contact = () => {
                 </svg>
               </div>
               <h4 className="font-semibold text-gray-800 mb-1">Email Us</h4>
-              <p className="text-gray-600 text-sm">abiodunepebinu@gmail.com</p>
+              <a
+                href="mailto:abiodunepebinu@gmail.com"
+                className="text-gray-600 text-sm hover:underline"
+              >
+                abiodunepebinu@gmail.com
+              </a>
             </div>
           </div>
         </div>

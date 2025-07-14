@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from "next/image"
 import Dp from "@/components/assets/images/bay dp.jpg"
+import Link from 'next/link'
 
 const About = () => {
   return (
@@ -30,9 +31,9 @@ const About = () => {
               Sustainability is at the core of our philosophy. We source
               materials responsibly and prioritize ethical production methods.
             </p>
-            <button className="bg-gray-800 hover:bg-black text-white font-bold py-2 px-6 rounded transition duration-300">
+            <Link href="about" className="bg-gray-800 hover:bg-black text-white font-bold py-2 px-6 rounded transition duration-300">
               Learn More
-            </button>
+            </Link>
           </div>
         </div>
       </div>

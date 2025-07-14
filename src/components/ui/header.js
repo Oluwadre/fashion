@@ -29,7 +29,7 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             <Link
-              href="#about"
+              href="about"
               className={`transition-colors duration-300 ${
                 scrolled
                   ? "text-gray-800 hover:text-pink-600"
@@ -108,7 +108,7 @@ const Header = () => {
         <div className={`md:hidden ${isMenuOpen ? "block bg-pink-600" : "hidden"}`}>
           <div className="pt-4 pb-2 space-y-3">
             <Link
-              href="#about"
+              href="about"
               className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
                 scrolled
                   ? "text-gray-800 hover:bg-gray-100"

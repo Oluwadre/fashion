@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import heroImage from "../../../public/hero.jpg"; 
+import Link from "next/link"
 
 const Hero = () => {
   return (
@@ -26,9 +27,9 @@ const Hero = () => {
         <p className="text-xl md:text-2xl text-white mb-8">
           Experience the latest collection from our visionary designers
         </p>
-        <button className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">
+        <Link href="collections" className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">
           View Collection
-        </button>
+        </Link>
       </div>
     </section>
   );

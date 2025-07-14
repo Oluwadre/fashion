@@ -1,6 +1,59 @@
-import React from 'react'
+import { useState } from 'react'
+
 
 const Contact = () => {
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch("https://your-api-endpoint.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        throw new Error("Submission failed");
+      }
+    } catch (error) {
+      setSubmitStatus("error");
+      console.error("Error submitting form:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+
   return (
     <section id="contact" className="py-20 bg-gray-100">
       <div className="container mx-auto px-6">
@@ -12,59 +65,85 @@ const Contact = () => {
             Interested in our collections or want to collaborate? Reach out to
             us.
           </p>
+          {submitStatus === "success" && (
+            <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-md">
+              Thank you! Your message has been sent successfully.
+            </div>
+          )}
 
-          <form className="bg-white p-8 rounded-lg shadow-md">
+          {submitStatus === "error" && (
+            <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-md">
+              There was an error submitting your message. Please try again.
+            </div>
+          )}
+
+          <form className="bg-white p-8 rounded-lg shadow-md" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label htmlFor="name" className="block text-gray-700 mb-2">
                   Name
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={data.name}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    onChange={handleChange}
+                    placeholder="Your name"
+                  />
                 </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
-                  placeholder="Your name"
-                />
               </div>
               <div>
                 <label htmlFor="email" className="block text-gray-700 mb-2">
                   Email
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={data.email}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    placeholder="Your email"
+                    onChange={handleChange}
+                    />
                 </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
-                  placeholder="Your email"
-                />
               </div>
             </div>
             <div className="mb-6">
               <label htmlFor="subject" className="block text-gray-700 mb-2">
                 Subject
+                <input
+                  type="text"
+                  name="subject"
+                  id="subject"
+                  value={data.subject}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  placeholder="Subject"
+                  onChange={handleChange}
+                  />
               </label>
-              <input
-                type="text"
-                id="subject"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
-                placeholder="Subject"
-              />
             </div>
             <div className="mb-6">
               <label htmlFor="message" className="block text-gray-700 mb-2">
                 Message
+                <textarea
+                  id="message"
+                  rows="5"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  value={data.message}
+                  name="message"
+                  onChange={handleChange}
+                  placeholder="Your message"
+                ></textarea>
               </label>
-              <textarea
-                id="message"
-                rows="5"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
-                placeholder="Your message"
-              ></textarea>
             </div>
             <button
               type="submit"
-              className="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-4 rounded-md transition duration-300"
+              disabled={isSubmitting}
+              className={`w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-4 rounded-md transition duration-300 ${
+                isSubmitting ? "opacity-75 cursor-not-allowed" : ""
+              }`}
             >
-              Send Message
+              {isSubmitting ? "Sending..." : "Send Message"}
             </button>
           </form>
 
